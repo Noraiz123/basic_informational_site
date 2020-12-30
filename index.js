@@ -2,7 +2,7 @@ const http = require('http')
 const url = require('url')
 const fs = require('fs')
 
-http.createServer((req, res) => {
+const server = http.createServer((req, res) => {
   const query = url.parse(req.url, true)
   let filename = (query.pathname === '/' ? './index.html' : '.' + query.pathname)
 
@@ -22,4 +22,8 @@ http.createServer((req, res) => {
     res.write(data)
     return res.end()
   })
-}).listen(8080)
+})
+
+server.listen(8080, 'localhost', () => {
+  console.log('Server is running.')
+})
